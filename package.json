@@ -10,7 +10,7 @@
     "stop-linux": "killall node"
   },
   "keywords": [],
-  "author": "",
+  "author": "Kishan",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
