@@ -4,10 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon",
-    "build": "tsc && copyfiles package.json .env dist",
-    "stop-win": "Taskkill /IM node.exe /F",
-    "stop-linux": "killall node"
+    "start": "node index.ts"
   },
   "keywords": [],
   "author": "Kishan",
