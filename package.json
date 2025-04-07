@@ -7,7 +7,7 @@
     "start": "nodemon"
   },
   "keywords": [],
-  "author": "Kishan",
+  "author": "Kishan Sandanayake",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
