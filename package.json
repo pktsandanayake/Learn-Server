@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon"
+    "start": "nodemon",
+    "stop-win": "Taskkill /IM node.exe /F"
   },
   "keywords": [],
   "author": "Kishan Sandanayake",

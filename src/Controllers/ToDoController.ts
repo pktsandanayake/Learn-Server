@@ -1,6 +1,6 @@
 import express from "express";
 import { ToDoModel } from "../DB/ToDo";
-import status from "../enums/status";
+import status from "../Enums/status";
 class ToDoController {
   getAllToDos = async (req: express.Request, res: express.Response) => {
     try {
@@ -56,7 +56,6 @@ class ToDoController {
   getToDosByFilter = async (req: express.Request, res: express.Response) => {
     try {
       const { priority, status, title, interval } = req.params;
-      console.log("priority:", priority, "status:", status, "title:", title);
 
       const Where =
         title == "NoTitle"
