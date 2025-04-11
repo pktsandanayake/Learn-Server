@@ -1,0 +1,4 @@
+{
+  "appService.defaultWebAppToDeploy": "undefined/subscriptions/439991a8-29da-4549-92fc-821844c1bab1/resourceGroups/appsvc_linux_southeastasia/providers/Microsoft.Web/sites/Taskify",
+  "appService.deploySubpath": "."
+}
