@@ -55,18 +55,20 @@ class ToDoController {
 
   getToDosByFilter = async (req: express.Request, res: express.Response) => {
     try {
-      const { priority, status, title, interval } = req.params;
+      const { priority, status, title, startDate, endDate } = req.params;
 
       const Where =
         title == "NoTitle"
           ? {
               priority: priority,
               status: status,
+              date: { $gte: startDate, $lt: endDate },
             }
           : {
               priority: priority,
               status: status,
               title: { $regex: title },
+              date: { $gte: startDate, $lt: endDate },
             };
       console.log("Where", Where);
       const todos = await ToDoModel.find(Where);
@@ -76,6 +78,13 @@ class ToDoController {
       return res.sendStatus(400);
     }
   };
+
+  addDays(date: Date, days: number) {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
+
   createToDo = async (req: express.Request, res: express.Response) => {
     try {
       if (Object.keys(req.body).length === 0) {
