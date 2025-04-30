@@ -79,12 +79,6 @@ class ToDoController {
     }
   };
 
-  addDays(date: Date, days: number) {
-    var result = new Date(date);
-    result.setDate(result.getDate() + days);
-    return result;
-  }
-
   createToDo = async (req: express.Request, res: express.Response) => {
     try {
       if (Object.keys(req.body).length === 0) {
