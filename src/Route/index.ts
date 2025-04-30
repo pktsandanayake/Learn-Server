@@ -12,6 +12,7 @@ router.get(
 );
 router.post("/todos/dependency", ToDoController.getToDosByDependency);
 router.post("/todo", ToDoController.createToDo);
+router.post("/todos", ToDoController.createToDos);
 router.put("/todo/:id", ToDoController.updateToDo);
 router.delete("/todo/:id", ToDoController.deleteToDo);
 router.delete("/todos", ToDoController.deleteToDos);
