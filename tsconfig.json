@@ -10,8 +10,8 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "allowJs": true,
-    "rootDir": "./src",
+    "rootDir": "api",
     "outDir": "./dist"
   },
-  "include": ["src/**/*"]
+  "include": ["api/**/*"]
 }
