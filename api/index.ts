@@ -1,5 +1,3 @@
-import app from "../src/app";
-
 export default function handler(req: any, res: any) {
-  return app(req, res);
+  res.status(200).json({ message: "Vercel Node function works" });
 }
