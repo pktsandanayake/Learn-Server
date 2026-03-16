@@ -6,7 +6,7 @@
   "scripts": {
     "stop-win": "Taskkill /IM node.exe /F",
     "dev": "ts-node api/index.ts",
-    "build": "tsc",
+    "build": "node build --output public",
     "start": "node dist/api/index.js"
   },
   "keywords": [],
