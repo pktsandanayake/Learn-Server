@@ -3,7 +3,7 @@ import serverless from "serverless-http";
 import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import router from "./Route/Route"; // your current router
+import router from "../src/Route/Route";
 
 dotenv.config();
 

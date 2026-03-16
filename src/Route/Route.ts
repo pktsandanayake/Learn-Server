@@ -8,7 +8,7 @@ router.get("/todo/:id", ToDoController.getToDo);
 router.get("/todos/date/:date", ToDoController.getToDoByDate);
 router.get(
   "/todos/filter/:priority/:status/:title/:startDate/:endDate",
-  ToDoController.getToDosByFilter
+  ToDoController.getToDosByFilter,
 );
 router.post("/todos/dependency", ToDoController.getToDosByDependency);
 router.post("/todo", ToDoController.createToDo);

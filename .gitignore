@@ -1,2 +1,4 @@
 node_modules/
 Dist/
+.vercel
+.env*.local

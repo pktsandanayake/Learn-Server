@@ -4,10 +4,11 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
+    "rootDir": "./",
     "outDir": "dist",
     "strict": true,
     "resolveJsonModule": true,
     "skipLibCheck": true
   },
-  "include": ["api/**/*.ts", "Route.ts", "Controllers/**/*.ts"]
+  "include": ["api/**/*.ts", "src/**/*.ts"]
 }
