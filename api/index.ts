@@ -16,12 +16,15 @@ app.use(
   }),
 );
 
-// router
-app.use("/api", router);
+// Router
+app.use("/", router);
 
-// simple test route
-app.get("/api/ping", (_req, res) => {
+// Health check
+app.get("/ping", (_req, res) => {
   res.json({ message: "Server alive" });
 });
 
-export default app;
+// Vercel serverless handler
+export default function handler(req: any, res: any) {
+  return app(req, res);
+}
