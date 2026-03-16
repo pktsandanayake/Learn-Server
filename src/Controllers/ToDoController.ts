@@ -1,158 +1,34 @@
-import express from "express";
-import { ToDoModel } from "../DB/ToDo";
-import status from "../Enums/status";
-class ToDoController {
-  getAllToDos = async (req: express.Request, res: express.Response) => {
-    try {
-      const todos = await ToDoModel.find();
-      return res.json(todos);
-    } catch (error) {
-      console.log(error);
-      return res.sendStatus(400);
-    }
-  };
+import { Request, Response } from "express";
+import ToDo from "../Models/ToDo";
 
-  getToDo = async (req: express.Request, res: express.Response) => {
-    try {
-      const { id } = req.params;
-      const todo = await ToDoModel.findById(id);
-      return res.json(todo);
-    } catch (error) {
-      console.log(error);
-      return res.sendStatus(400);
-    }
-  };
+export default {
+  async getAllToDos(_req: Request, res: Response) {
+    const todos = await ToDo.find();
+    res.json(todos);
+  },
 
-  getToDoByDate = async (req: express.Request, res: express.Response) => {
-    try {
-      const { date } = req.params;
-      const todos = await ToDoModel.find({
-        date: date,
-      });
-      return res.json(todos);
-    } catch (error) {
-      console.log(error);
-      return res.sendStatus(400);
-    }
-  };
+  async getToDo(req: Request, res: Response) {
+    const todo = await ToDo.findById(req.params.id);
+    if (!todo) return res.status(404).json({ error: "Not found" });
+    res.json(todo);
+  },
 
-  getToDosByDependency = async (
-    req: express.Request,
-    res: express.Response
-  ) => {
-    try {
-      const { dependancy } = req.body;
-      const todos = await ToDoModel.find({
-        _id: dependancy,
-        status: status.NotDone,
-      });
-      return res.json(todos);
-    } catch (error) {
-      console.log(error);
-      return res.sendStatus(400);
-    }
-  };
+  async createToDo(req: Request, res: Response) {
+    const todo = await ToDo.create(req.body);
+    res.status(201).json(todo);
+  },
 
-  getToDosByFilter = async (req: express.Request, res: express.Response) => {
-    try {
-      const { priority, status, title, startDate, endDate } = req.params;
+  async updateToDo(req: Request, res: Response) {
+    const todo = await ToDo.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!todo) return res.status(404).json({ error: "Not found" });
+    res.json(todo);
+  },
 
-      const Where =
-        title == "NoTitle"
-          ? {
-              priority: priority,
-              status: status,
-              date: { $gte: startDate, $lt: endDate },
-            }
-          : {
-              priority: priority,
-              status: status,
-              title: { $regex: title },
-              date: { $gte: startDate, $lt: endDate },
-            };
-      console.log("Where", Where);
-      const todos = await ToDoModel.find(Where);
-      return res.json(todos);
-    } catch (error) {
-      console.log(error);
-      return res.sendStatus(400);
-    }
-  };
-
-  createToDo = async (req: express.Request, res: express.Response) => {
-    try {
-      if (Object.keys(req.body).length === 0) {
-        return res.sendStatus(400);
-      }
-      const todo = await ToDoModel.collection.insertOne(req.body);
-
-      return res.json({ message: "Todo has been created", todo });
-    } catch (error) {
-      console.log(error);
-      return res.sendStatus(400);
-    }
-  };
-
-  createToDos = async (req: express.Request, res: express.Response) => {
-    try {
-      if (Object.keys(req.body).length === 0) {
-        return res.sendStatus(400);
-      }
-      const todos = await ToDoModel.collection.insertMany(req.body);
-
-      return res.json({ message: "Todo has been created", todos });
-    } catch (error) {
-      console.log(error);
-      return res.sendStatus(400);
-    }
-  };
-
-  updateToDo = async (req: express.Request, res: express.Response) => {
-    try {
-      if (Object.keys(req.body).length === 0) {
-        return res.sendStatus(400);
-      }
-      const { id } = req.params;
-      const { date, title, status, priority, dependancy } = req.body;
-
-      const todo = await ToDoModel.findById(id);
-      if (todo) {
-        todo.date = date;
-        todo.title = title;
-        todo.status = status;
-        todo.priority = priority;
-        todo.dependancy = dependancy;
-        await todo.save();
-        return res.json({ todo });
-      }
-
-      return res.sendStatus(400);
-    } catch (error) {
-      console.log(error);
-      return res.sendStatus(400);
-    }
-  };
-
-  deleteToDo = async (req: express.Request, res: express.Response) => {
-    try {
-      const { id } = req.params;
-      await ToDoModel.findByIdAndDelete({ _id: id });
-      return res.json({ message: "record deleted" });
-    } catch (error) {
-      console.log(error);
-      return res.sendStatus(400);
-    }
-  };
-
-  deleteToDos = async (req: express.Request, res: express.Response) => {
-    try {
-      const todos = await ToDoModel.collection.deleteMany();
-      return res.json({ message: "All record deleted" });
-    } catch (error) {
-      console.log(error);
-      return res.sendStatus(400);
-    }
-  };
-}
-
-export default new ToDoController();
+  async deleteToDo(req: Request, res: Response) {
+    const todo = await ToDo.findByIdAndDelete(req.params.id);
+    if (!todo) return res.status(404).json({ error: "Not found" });
+    res.json({ message: "Deleted successfully" });
+  },
+};

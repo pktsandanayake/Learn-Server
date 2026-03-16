@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 
 const ToDoSchema = new mongoose.Schema({
-  date: { type: String, required: true },
   title: { type: String, required: true },
-  status: { type: String, required: true },
-  priority: { type: String, required: true },
-  dependancy: { type: Array, required: false },
+  description: String,
+  status: { type: String, default: "pending" },
+  priority: { type: String, default: "low" },
+  createdAt: { type: Date, default: Date.now },
 });
 
-export const ToDoModel = mongoose.model("ToDo", ToDoSchema);
+export default mongoose.models.ToDo || mongoose.model("ToDo", ToDoSchema);

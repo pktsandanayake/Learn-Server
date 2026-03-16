@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon",
-    "stop-win": "Taskkill /IM node.exe /F"
+    "stop-win": "Taskkill /IM node.exe /F",
+    "dev": "ts-node api/index.ts",
+    "build": "tsc",
+    "start": "node dist/api/index.js"
   },
   "keywords": [],
   "author": "Kishan Sandanayake",
